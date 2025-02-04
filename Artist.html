@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"> 
+    <link rel="icon" href="img/spotifyLogo.png"  type="image/x-icon">  
+</head>
+<body id="body">
+    
+    <header>
+        
+        <div class="icon__menu">
+            <i class="fa-solid fa-bars fa-2xl" style="color: #ffffff;" id="btn_open"></i>
+        </div>
+
+     
+        <div class="topbar">
+            <div class="container-arrows">
+                
+            </div>
+            <div class="buttons-user">
+                <a href="#" class="btn-register">Registrarte</a>
+                <a href="#" class="btn-login btn-full">Iniciar sesión</a>
+            </div>
+        </div>
+
+    </header>
+    
+
+
+    <div class="menu__side" id="menu_side">
+        
+        <div class="name__page">
+            <i class="fa-brands fa-spotify fa-xl" style="color: #ffffff;"></i>
+            <h4>Spotify</h4>
+        </div>
+    
+        
+
+        <div class="options__menu">	
+
+            <a href="Index.html" class="selected text-decoration-none">
+                <div class="option">
+                    <i class="fa-solid fa-house"></i>
+                    <h4>Inicio</h4>
+                </div>
+            </a>
+
+            <a href="#" class="text-decoration-none">
+                <div class="option">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <h4>Buscar</h4>
+                </div>
+            </a>
+            
+            <a href="#" class="text-decoration-none">
+                <div class="option">
+                    <i class="fa-solid fa-bookmark"></i>
+                    <h4>Tu Biblioteca</h4>
+                </div>
+            </a>
+
+            <a href="#" class="text-decoration-none">
+                <div class="option">
+                    <i class="fa-solid fa-plus"></i>
+                    <h4>Crear Lista</h4>
+                </div>
+            </a>
+
+            <a href="#" class="text-decoration-none">
+                <div class="option">
+                    <i class="fa-solid fa-heart"></i>
+                    <h4>Canciones que te gustan</h4>
+                </div>
+            </a>
+
+            <a href="#" class="text-decoration-none">
+                <div class="option">
+                    <i class="far fa-address-card" title="Nosotros"></i>
+                    <h4>Nosotros</h4>
+                </div>
+            </a>
+
+        </div>
+
+    </div>
+
+    <main>
+<!-- EN estas etiquetas se muestran las respuestas de la API-------------------------------------------------------------
+         -->
+
+        <div id="artist-info" class="artist-info"></div>
+        <div id="artist-details" class="artist-details"></div>
+
+        <h1 class="titleAlbum">ÁLBUMES</h1>
+        
+        <a href="Album.html"> 
+            <div id="albums-container" class="albums-container"></div>
+        </a>	
+        
+
+    </main>
+
+    <div class="banner-bottom">
+        <div class="music-player">
+            <div class="buttons">
+                <button class="previous-button"><i class="fa-solid fa-backward-step fa-2xl" style="color: #ffffff;"></i></button>
+                <button class="play-button"><i class="fa-solid fa-play fa-xl" style="color: #f2f3f2;"></i></button>
+                <button class="next-button"><i class="fa-solid fa-forward-step fa-2xl" style="color: #fafafa;"></i></button>
+              </div>
+              <div class="progress-bar"></div>
+        </div>
+       
+      </div> 
+  
+    <script src="api.js"></script>
+    
+    
+</body>
+</html>
