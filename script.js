@@ -75,7 +75,7 @@ async function fetchRandomArtists(token) {
         const randomTerm = searchTerms[Math.floor(Math.random() * searchTerms.length)];
 
         // Realiza la búsqueda en la API de Spotify
-        const response = await fetch(`https://api.spotify.com/v1/search?q=${randomTerm}&type=artist&limit=8`, {
+        const response = await fetch(`https://api.spotify.com/v1/search?q=${randomTerm}&type=artist&limit=10`, {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -122,14 +122,73 @@ function redirectToArtist(artistId) {
 
 // Función principal para cargar el contenido
 async function loadContent() {
-    const token = await getAccessToken(); // Obtén el token de acceso
-    const artists = await fetchRandomArtists(token); // Obtén artistas aleatorios
+    const token = await getAccessToken(); //  el token de acceso
+    const artists = await fetchRandomArtists(token); //  artistas aleatorios
     renderArtists(artists); // Renderiza los artistas en la página
 }
+
+// Función para buscar artistas populares
+async function fetchPopularArtists(token) {
+    try {
+        // Obtener artistas populares (puedes ajustar el límite y otros parámetros)
+        const response = await fetch(`https://api.spotify.com/v1/search?q=genre:pop&type=artist&limit=8`, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        console.log(data);
+        return data.artists.items;
+    } catch (error) {
+        console.error('Error al buscar artistas populares:', error);
+        return [];
+    }
+}
+
+// Función para renderizar los artistas en la página
+function renderArtists(artists, containerSelector) {
+    const container = document.querySelector(containerSelector);
+    if (artists.length > 0) {
+        container.innerHTML = artists.map(artist => `
+            <button class="card-concentracion" onclick="redirectToArtist('${artist.id}')">
+                <div class="card-img">
+                    <img src="${artist.images[0]?.url || 'img/placeholder.jpg'}" alt="${artist.name}" />
+                    <div class="overlay"></div>
+                </div>
+                <h4>${artist.name}</h4>
+            </button>
+        `).join('');
+    } else {
+        container.innerHTML = '<p>No se encontraron artistas.</p>';
+    }
+}
+
+// Función para redirigir a la página del artista
+function redirectToArtist(artistId) {
+    window.location.href = `Artist.html?artist=${artistId}`;
+}
+
+// Función principal para cargar el contenido
+async function loadContent() {
+    const token = await getAccessToken(); // Obtén el token de acceso
+
+    // Obtén y renderiza artistas aleatorios
+    const randomArtists = await fetchRandomArtists(token);
+    renderArtists(randomArtists, '.container-card-concentracion');
+
+    // Obtén y renderiza artistas populares
+    const popularArtists = await fetchPopularArtists(token);
+    renderArtists(popularArtists, '.container-card-spotify-playlists');
+}
+
 
 
 loadContent();
 
-
-// script para obtener playlist
 
